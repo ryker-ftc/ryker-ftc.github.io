@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <style>
+      #header {
+        float: top;
+        width: 403px;
+        text-align: center;
+        display: inline;
+        vertical-align: top;
+      }
+      h3 {
+        text-align: center;
+      }
+      h5 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="header">Should you take out your trash this week?</h1>
+    <h3>If you live in Hamilton County, Cincinnati, this website will flash green if you should take out your trash this week</h3>
+  
+    <script>
+      class Main {
+        constructor() {
+          this.colorValue = "red";
+          if (this.isCorrectWeek()) {
+            this.colorValue = "limegreen";
+          }
+        }
+  
+        isCorrectWeek() {
+          const today = new Date();
+          const monthNumber = today.getMonth() + 1; // JavaScript months are 0-based, so add 1
+          const dayNumber = today.getDate();
+          console.log("current full date is: " + today);
+  
+       console.log("the current month is: " + monthNumber);
+          console.log("the current day is: " + dayNumber);
+  
+          let numbDaysPassed;
+  
+          if (monthNumber < 8) {
+            numbDaysPassed = monthNumber * 31 - Math.floor(monthNumber / 2) - 2 + dayNumber;
+            console.log("the month is less than August");
+          } else {
+            numbDaysPassed =
+              7 * 31 -
+              Math.floor(7 / 2) -
+              2 +
+              dayNumber +
+              (monthNumber - 8) * 31 -
+              Math.floor((monthNumber - 7) / 2);
+            console.log("it is August or greater than August");
+          }
+  
+          console.log("the number of days that have passed: " + numbDaysPassed);
+  
+          const numbWeeksPassed = Math.floor(numbDaysPassed / 7);
+          console.log("the number of weeks that have passed: " + numbWeeksPassed);
+  
+  
+          let shouldITakeOutTrash = false;
+  
+          if (numbWeeksPassed % 2 === 0) {
+            shouldITakeOutTrash = true;
+            console.log("you should take out your trash this week");
+          } else {
+            console.log("you should take out your trash next week");
+          }
+  
+          return shouldITakeOutTrash;
+        }
+      }
+  
+      const mainInstance = new Main();
+      document.body.style.backgroundColor = mainInstance.colorValue; // Change background color here
+    </script>
+  </body>
+  </html>
+  
